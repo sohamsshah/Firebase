@@ -1,4 +1,4 @@
-# Firebase
+# Firebase-Utils
 Different Boiler-plate codes for various Firebase Utils: At one stop destination.
 
 ---
