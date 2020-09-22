@@ -1,3 +1,10 @@
+// listen for auth status changes
+
+auth.onAuthStateChanged(user => {
+    user ? console.log("User Logged In", user) : console.log("User Logged Out!"); // returns user if logged in and null if logged out
+})
+
+
 // signup
 
 const signupForm = document.querySelector('#signup-form');
@@ -12,9 +19,9 @@ signupForm.addEventListener('submit', (e) => {
     //sign up the user
 
     auth.createUserWithEmailAndPassword(email,password).then((credential) => {
-        console.log(credential);
+        
         const modal = document.querySelector('#modal-signup');
-        M.modal.getInstance(modal).close();
+        M.Modal.getInstance(modal).close();
         signupForm.reset();
     });
 });
@@ -25,7 +32,21 @@ signupForm.addEventListener('submit', (e) => {
 const logout = document.querySelector('#logout');
 logout.addEventListener('click', (e)=>{
     e.preventDefault();
-    auth.signOut().then(() => {
-        console.log("User Signed Out!");
-    });
+    auth.signOut();
+})
+
+// log in
+
+const loginForm = document.querySelector('#login-form');
+loginForm.addEventListener('click', (e) => {
+    e.preventDefault();
+    // get user Info
+
+    const email = loginForm['login-email'].value;
+    const password = loginForm['login-password'].value;
+    auth.signInWithEmailAndPassword(email, password).then(cred => {
+        const modal = document.querySelector('#modal-login');
+        M.Modal.getInstance(modal).close();
+        loginForm.reset();
+    })
 })
