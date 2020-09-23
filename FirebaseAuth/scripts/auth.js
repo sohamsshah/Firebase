@@ -3,16 +3,35 @@
 
 auth.onAuthStateChanged(user => {
     user ? 
-    db.collection('Guides').get().then(snapshot => {
+    db.collection('Guides').onSnapshot(snapshot => {
+        
         setupGuides(snapshot.docs);
-    }) 
+        setupUI(user);   
+    })
     : 
     db.collection('Guides').get().then(snapshot => {
+        setupUI();
         setupGuides([]);
+        
     }) 
     
 })
 
+//create new guide
+
+const createForm = document.querySelector('#create-form');
+createForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    db.collection('Guides').add({
+        title: createForm['title'].value,
+        Content: createForm['content'].value,
+    }).then(() => {
+        const modal = document.querySelector('#modal-create');
+        M.Modal.getInstance(modal).close();
+        createForm.reset();
+
+    });
+});
 
 // signup
 
@@ -28,7 +47,11 @@ signupForm.addEventListener('submit', (e) => {
     //sign up the user
 
     auth.createUserWithEmailAndPassword(email,password).then((credential) => {
+        return db.collection('users').doc(credential.user.uid).set({
+            bio: signupForm['signup-bio'].value
+        });
         
+    }).then(() => {
         const modal = document.querySelector('#modal-signup');
         M.Modal.getInstance(modal).close();
         signupForm.reset();
