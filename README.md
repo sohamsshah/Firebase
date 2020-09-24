@@ -16,6 +16,7 @@ Just make sure you don't push the files that include secret keys, private web ho
 
 * [Firebase-Firestore](https://github.com/sohamsshah/Firebase/tree/master/Firestore)
 * [Firebase-Authentication](https://github.com/sohamsshah/Firebase/tree/master/FirebaseAuth)
+* [Firebase-Storage](https://github.com/sohamsshah/Firebase-Utils/tree/master/FirebaseStorage)
 
 ---
 ---
