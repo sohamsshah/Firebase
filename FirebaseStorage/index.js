@@ -5,6 +5,7 @@ var firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
   var uploader = document.getElementById('uploader');
   var fileButton = document.getElementById('fileButton');
+  var storage = firebase.storage();
 
   fileButton.addEventListener('change', (e) => {
       var file = e.target.files[0];
@@ -25,7 +26,7 @@ var firebaseConfig = {
       }
 )
   });
-  var storage = firebase.storage();
+  
 
   storage.ref('test/download (1).png').getDownloadURL().then(function(url) {
     console.log(url)
