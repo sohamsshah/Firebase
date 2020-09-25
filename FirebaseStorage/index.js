@@ -1,5 +1,5 @@
 var firebaseConfig = {
-    // your firebase credentials here
+  // your firebase details here
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
@@ -24,4 +24,13 @@ var firebaseConfig = {
 
       }
 )
+  });
+  var storage = firebase.storage();
+
+  storage.ref('test/download (1).png').getDownloadURL().then(function(url) {
+    console.log(url)
+    var img = document.getElementById('myimg');
+    img.src = url; // shows the image!
+  }).catch(function(error) {
+    // Handle any errors
   });
